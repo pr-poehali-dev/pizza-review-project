@@ -13,16 +13,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search, Bell, PlusSquare, Home, TrendingUp, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // В будущем будет заменено на реальную аутентификацию
+  const navigate = useNavigate();
 
   return (
     <div className="border-b fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-950">
       <div className="container flex items-center justify-between py-2">
         {/* Лого */}
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold text-primary">RedditClone</h1>
+          <Link to="/">
+            <h1 className="text-xl font-bold text-primary">RedditClone</h1>
+          </Link>
         </div>
 
         {/* Поиск */}
@@ -38,7 +42,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-1">
           {isLoggedIn ? (
             <>
-              <Button variant="ghost" size="icon" className="hidden sm:flex">
+              <Button variant="ghost" size="icon" className="hidden sm:flex" as={Link} to="/">
                 <Home className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" className="hidden sm:flex">
@@ -50,7 +54,12 @@ const Navbar = () => {
               <Button variant="ghost" size="icon">
                 <Bell className="h-5 w-5" />
               </Button>
-              <Button variant="primary" size="sm" className="hidden sm:flex">
+              <Button 
+                variant="primary" 
+                size="sm" 
+                className="hidden sm:flex"
+                onClick={() => navigate("/create-post")}
+              >
                 <PlusSquare className="h-4 w-4 mr-2" />
                 Создать пост
               </Button>
@@ -94,10 +103,18 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Button variant="outline" size="sm" className="mr-2" onClick={() => setIsLoggedIn(true)}>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="mr-2" 
+                onClick={() => navigate("/login")}
+              >
                 Войти
               </Button>
-              <Button size="sm">
+              <Button 
+                size="sm"
+                onClick={() => navigate("/register")}
+              >
                 Регистрация
               </Button>
             </>
