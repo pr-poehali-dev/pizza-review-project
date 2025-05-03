@@ -10,7 +10,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, Bell, PlusSquare, Home, Trending, Users } from "lucide-react";
+import { Search, Bell, PlusSquare, Home, TrendingUp, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -42,7 +42,7 @@ const Navbar = () => {
                 <Home className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" className="hidden sm:flex">
-                <Trending className="h-5 w-5" />
+                <TrendingUp className="h-5 w-5" />
               </Button>
               <Button variant="ghost" size="icon" className="hidden sm:flex">
                 <Users className="h-5 w-5" />

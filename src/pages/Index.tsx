@@ -5,7 +5,8 @@ import PostCard from "@/components/PostCard";
 import PostSkeleton from "@/components/PostSkeleton";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Home, Trending, Users } from "lucide-react";
+import { Home, TrendingUp, Users } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Временные данные для демонстрации
 const MOCK_POSTS = [
@@ -102,7 +103,7 @@ const Index = () => {
                   <span className="hidden sm:inline">Главная</span>
                 </TabsTrigger>
                 <TabsTrigger value="trending" className="flex items-center">
-                  <Trending className="h-4 w-4 mr-2" />
+                  <TrendingUp className="h-4 w-4 mr-2" />
                   <span className="hidden sm:inline">Популярное</span>
                 </TabsTrigger>
                 <TabsTrigger value="following" className="flex items-center">
