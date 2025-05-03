@@ -1,11 +1,12 @@
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import PostCard from "@/components/PostCard";
 import PostSkeleton from "@/components/PostSkeleton";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Home, TrendingUp, Users } from "lucide-react";
+import { Home, TrendingUp, Users, PlusCircle } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Временные данные для демонстрации
@@ -19,7 +20,8 @@ const MOCK_POSTS = [
     timeAgo: "2 часа назад",
     likesCount: 142,
     commentsCount: 23,
-    images: ["https://images.unsplash.com/photo-1682686580391-615b1f28e330?q=80&w=1000"]
+    images: ["https://images.unsplash.com/photo-1682686580391-615b1f28e330?q=80&w=1000"],
+    category: "science"
   },
   {
     id: "2",
@@ -29,7 +31,8 @@ const MOCK_POSTS = [
     timeAgo: "5 часов назад",
     likesCount: 89,
     commentsCount: 15,
-    images: []
+    images: [],
+    category: "programming"
   },
   {
     id: "3",
@@ -44,13 +47,15 @@ const MOCK_POSTS = [
       "https://images.unsplash.com/photo-1551844931-7a24ef243a3d?q=80&w=1000",
       "https://images.unsplash.com/photo-1543363136-3fdb62e11be5?q=80&w=1000",
       "https://images.unsplash.com/photo-1548850174-76fb4ccfbb05?q=80&w=1000"
-    ]
+    ],
+    category: "travel"
   }
 ];
 
 const Index = () => {
   const [posts, setPosts] = useState<typeof MOCK_POSTS>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Имитируем загрузку данных с задержкой
@@ -96,6 +101,17 @@ const Index = () => {
           
           {/* Основной контент */}
           <div className="md:col-span-2">
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-2xl font-bold">Лента постов</h1>
+              <Button 
+                onClick={() => navigate("/create-post")}
+                className="flex items-center gap-2"
+              >
+                <PlusCircle size={16} />
+                Создать пост
+              </Button>
+            </div>
+          
             <Tabs defaultValue="home" className="mb-4">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="home" className="flex items-center">
@@ -161,7 +177,12 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground mb-3">
                   Поделитесь своими мыслями или медиа с сообществом
                 </p>
-                <Button className="w-full">Создать пост</Button>
+                <Button 
+                  className="w-full"
+                  onClick={() => navigate("/create-post")}
+                >
+                  Создать пост
+                </Button>
               </div>
               
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
